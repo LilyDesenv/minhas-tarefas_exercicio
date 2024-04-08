@@ -2,38 +2,54 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import Tarefa from '../../models/Tarefa'
 import * as enums from '../../utils/enums/Tarefa'
 
+type TarefasState = {
+  itens: Tarefa[]
+}
+
+const initialState: TarefasState = {
+  itens: [
+    {
+      id: 1,
+      titulo: 'Titulo da Tarefa 1',
+      prioridade: enums.Prioridade.IMPORTANTE,
+      status: enums.Status.PENDENTE,
+      descricao: 'Descrição da Tarefa 1'
+    },
+    {
+      id: 2,
+      titulo: 'Titulo da Tarefa 2',
+      prioridade: enums.Prioridade.URGENTE,
+      status: enums.Status.CONCLUIDO,
+      descricao: 'Descrição da Tarefa 2'
+    },
+    {
+      id: 3,
+      titulo: 'Titulo da Tarefa 3',
+      prioridade: enums.Prioridade.NORMAL,
+      status: enums.Status.PENDENTE,
+      descricao: 'Descrição da Tarefa 3'
+    }
+  ]
+}
+
 const tarefasSlice = createSlice({
   name: 'tarefas',
-  initialState: [
-    new Tarefa(
-      1,
-      'Titulo da Tarefa 1',
-      enums.Prioridade.IMPORTANTE,
-      enums.Status.PENDENTE,
-      'Descrição da Tarefa 1'
-    ),
-    new Tarefa(
-      1,
-      'Titulo da Tarefa 2',
-      enums.Prioridade.NORMAL,
-      enums.Status.PENDENTE,
-      'Descrição da Tarefa 2'
-    ),
-    new Tarefa(
-      1,
-      'Titulo da Tarefa 3',
-      enums.Prioridade.IMPORTANTE,
-      enums.Status.CONCLUIDO,
-      'Descrição da Tarefa 3'
-    )
-  ],
+  initialState,
   reducers: {
     remover: (state, action: PayloadAction<number>) => {
-      state = state.filter((Tarefa) => Tarefa.id !== action.payload)
+      state.itens = state.itens.filter((tarefa) => tarefa.id !== action.payload)
+    },
+    editar: (state, action: PayloadAction<Tarefa>) => {
+      const indexDaTarefa = state.itens.findIndex(
+        (t) => t.id === action.payload.id
+      )
+      if (indexDaTarefa >= 0) {
+        state.itens[indexDaTarefa] = action.payload
+      }
     }
   }
 })
 
-export const { remover } = tarefasSlice.actions
+export const { remover, editar } = tarefasSlice.actions
 
 export default tarefasSlice.reducer
