@@ -5,7 +5,6 @@ import { Campo } from '../../styles'
 import { Form, Opcoes, Opcao } from './styles'
 import { useDispatch } from 'react-redux'
 import * as enums from '../../utils/enums/Tarefa'
-import Tarefa from '../../models/Tarefa'
 import { cadastrar } from '../../store/reducers/tarefas'
 
 const Formulario = () => {
@@ -17,15 +16,15 @@ const Formulario = () => {
 
   const cadastrarTarefa = (evento: FormEvent) => {
     evento.preventDefault()
-    const tarefaPAdd = new Tarefa(
-      9,
-      titulo,
-      prioridade,
-      enums.Status.PENDENTE,
-      descricao
-    )
 
-    dispatch(cadastrar(tarefaPAdd))
+    dispatch(
+      cadastrar({
+        titulo,
+        prioridade,
+        descricao,
+        status: enums.Status.PENDENTE
+      })
+    )
     navigate('/')
   }
 
