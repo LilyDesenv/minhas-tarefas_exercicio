@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import Tarefa from '../../components/Tarefa'
-import { Container, Titulo } from './styles'
+import { MainContainer, Titulo } from '../../styles'
 import { RootReducer } from '../../store'
 
 const ListaDeTarefas = () => {
@@ -35,13 +35,13 @@ const ListaDeTarefas = () => {
 
   const exibeResultadoFiltragem = (quantidade: number) => {
     return `${quantidade} Tarefas marcadas como:
-    "${valor !== undefined ? `${criterio} = ${valor}` : `todas`}"
+    ${valor !== undefined ? `"${criterio} = ${valor}"` : `Todas`}
     ${termo !== undefined && termo.length > 0 ? `e "${termo}"` : '  '}
     `
   }
 
   return (
-    <Container>
+    <MainContainer>
       <Titulo>{exibeResultadoFiltragem(tarefas.length)}</Titulo>
       <ul>
         {tarefas.map((t) => (
@@ -56,7 +56,7 @@ const ListaDeTarefas = () => {
           </li>
         ))}
       </ul>
-    </Container>
+    </MainContainer>
   )
 }
 

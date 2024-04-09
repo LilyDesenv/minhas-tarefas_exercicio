@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux'
 import FiltroCard from '../../components/FiltroCArd'
-import { Aside, Filtros, Campo } from './styles'
+import { Aside, Filtros } from './styles'
 import { RootReducer } from '../../store'
+import { Campo } from '../../styles'
 import { alteraTermo } from '../../store/reducers/filtro'
 import * as enums from '../../utils/enums/Tarefa'
 
