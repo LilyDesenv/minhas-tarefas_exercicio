@@ -12,4 +12,5 @@ export const Titulo = styled.p`
   line-height: 21px;
   margin-bottom: 40px;
   margin-top: 40px;
+  display: block;
 `

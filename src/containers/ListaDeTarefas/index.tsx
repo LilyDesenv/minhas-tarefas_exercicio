@@ -27,18 +27,24 @@ const ListaDeTarefas = () => {
       }
       return tarefasFiltradas
     } else {
-      return tarefasFiltradas
+      return itens
     }
+  }
+
+  const tarefas = filtraTarefas()
+
+  const exibeResultadoFiltragem = (quantidade: number) => {
+    return `${quantidade} Tarefas marcadas como:
+    "${valor !== undefined ? `${criterio} = ${valor}` : `todas`}"
+    ${termo !== undefined && termo.length > 0 ? `e "${termo}"` : '  '}
+    `
   }
 
   return (
     <Container>
-      <Titulo>
-        2 Tarefas marcadas como: &quot;categoria&quot; e &quot;{termo}&quot;
-      </Titulo>
+      <Titulo>{exibeResultadoFiltragem(tarefas.length)}</Titulo>
       <ul>
-        {/* {itens.map((t) => ( */}
-        {filtraTarefas().map((t) => (
+        {tarefas.map((t) => (
           <li key={t.titulo}>
             <Tarefa
               id={t.id}
